@@ -1,5 +1,6 @@
 import { CollectionConfig } from 'payload';
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
+import { MarkFeature } from '../features/MarkFeature/feature.server';
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
@@ -15,7 +16,9 @@ export const Posts: CollectionConfig = {
     {
       name: 'content',
       type: 'richText',
-      editor: lexicalEditor({}),
+      editor: lexicalEditor({
+        features: ({ defaultFeatures }) => [...defaultFeatures, MarkFeature()]
+      }),
       required: true,
     },
   ],
