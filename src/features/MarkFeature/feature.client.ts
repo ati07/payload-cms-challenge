@@ -20,18 +20,22 @@ export const MarkClientFeature = createClientFeature({
         {
           ChildComponent: MarkIcon,
           key: 'mark',
-          order: 6, // Between strikethrough (5) and subscript (7)
+          order: 5, // Between strikethrough (5) and subscript (7)
           label: ({ i18n }) => i18n.t('lexical:mark:label'), // Reference server-side i18n
           isActive: ({ selection }) => {
             if (!$isRangeSelection(selection)) return false;
             const nodes = selection.getNodes();
-            return nodes.every((node) => $isMarkNode(node) || node.getParents().some($isMarkNode));
+            //  || node.getParents().some($isMarkNode)
+            // return nodes.every((node) => $isMarkNode(node));
+            return nodes.every(
+              (node) => $isMarkNode(node) || $isMarkNode(node.getParent()),
+            );
           },
-          isEnabled: ({ selection }) => {
-            if (!$isRangeSelection(selection)) return false;
-            const nodes = selection.getNodes();
-            return !nodes.every((node) => $isMarkNode(node) || node.getParents().some($isMarkNode));
-          },
+          // isEnabled: ({ selection }) => {
+          //   if (!$isRangeSelection(selection)) return false;
+          //   const nodes = selection.getNodes();
+          //   return !nodes.every((node) => $isMarkNode(node) || node.getParents().some($isMarkNode));
+          // },
           onSelect: ({ editor }) => {
             editor.dispatchCommand(TOGGLE_MARK_COMMAND, undefined);
           },
