@@ -162,3 +162,34 @@ svg {
     }
   }
 }
+
+.editor-input {
+  min-height: 120px;
+  border: 1px solid #ccc;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.footnote {
+  position: relative;
+  .footnote-preview {
+    display: none;
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  &:hover .footnote-preview {
+    display: block;
+  }
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+}

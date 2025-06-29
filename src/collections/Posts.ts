@@ -1,6 +1,7 @@
 import { CollectionConfig } from 'payload';
 import { lexicalEditor } from '@payloadcms/richtext-lexical';
 import { MarkFeature } from '../features/MarkFeature/feature.server';
+import { FootnoteFeature } from '../features/FootnoteFeature/feature.server'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
@@ -17,7 +18,7 @@ export const Posts: CollectionConfig = {
       name: 'content',
       type: 'richText',
       editor: lexicalEditor({
-        features: ({ defaultFeatures }) => [...defaultFeatures, MarkFeature()]
+        features: ({ defaultFeatures }) => [...defaultFeatures, MarkFeature(),FootnoteFeature()]
       }),
       required: true,
     },

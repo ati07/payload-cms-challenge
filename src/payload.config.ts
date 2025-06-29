@@ -21,7 +21,19 @@ export default buildConfig({
     },
   },
   collections: [Users, Posts],
-  editor: lexicalEditor({}),
+  editor: lexicalEditor({
+    features: ({ defaultFeatures }) => {
+    return [
+      ...defaultFeatures.filter(
+        (feature) => {
+          // console.log("SubscriptFeature",feature)
+          return feature.key !== 'superscript' && feature.key !== 'subscript'}
+      ),
+      
+    ];
+  },
+
+  }),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
